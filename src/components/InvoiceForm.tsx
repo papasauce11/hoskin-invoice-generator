@@ -345,7 +345,7 @@ export default function InvoiceForm({ data, onChange, errors, logoUrl, onLogoUpl
                 </button>
               </div>
             </div>
-            <div className="grid grid-cols-3 gap-2 mb-2">
+            <div className="grid grid-cols-2 gap-2 mb-2">
               <div>
                 <label className="block text-xs text-gray-500 mb-0.5">HS Code</label>
                 <input
@@ -355,33 +355,6 @@ export default function InvoiceForm({ data, onChange, errors, logoUrl, onLogoUpl
                 />
               </div>
               <div>
-                <label className="block text-xs text-gray-500 mb-0.5">No. of Packages</label>
-                <input
-                  type="number"
-                  className={fieldClass()}
-                  value={item.numPackages}
-                  onChange={(e) => updateLineItem(index, "numPackages", e.target.value)}
-                />
-              </div>
-              <div>
-                <label className="block text-xs text-gray-500 mb-0.5">Type of Package</label>
-                <input
-                  className={fieldClass()}
-                  value={item.typeOfPackage}
-                  onChange={(e) => updateLineItem(index, "typeOfPackage", e.target.value)}
-                />
-              </div>
-            </div>
-            <div className="grid grid-cols-[1fr_auto] gap-2 mb-2">
-              <div>
-                <label className="block text-xs text-gray-500 mb-0.5">Full Description of Goods</label>
-                <input
-                  className={fieldClass()}
-                  value={item.description}
-                  onChange={(e) => updateLineItem(index, "description", e.target.value)}
-                />
-              </div>
-              <div className="w-36">
                 <label className="block text-xs text-gray-500 mb-0.5">Country of Origin</label>
                 <input
                   className={fieldClass()}
@@ -391,7 +364,15 @@ export default function InvoiceForm({ data, onChange, errors, logoUrl, onLogoUpl
                 />
               </div>
             </div>
-            <div className="grid grid-cols-5 gap-2">
+            <div className="mb-2">
+              <label className="block text-xs text-gray-500 mb-0.5">Full Description of Goods</label>
+              <input
+                className={fieldClass()}
+                value={item.description}
+                onChange={(e) => updateLineItem(index, "description", e.target.value)}
+              />
+            </div>
+            <div className="grid grid-cols-4 gap-2">
               <div>
                 <label className="block text-xs text-gray-500 mb-0.5">Qty</label>
                 <input
@@ -427,15 +408,6 @@ export default function InvoiceForm({ data, onChange, errors, logoUrl, onLogoUpl
                     placeholder="Custom unit"
                   />
                 )}
-              </div>
-              <div>
-                <label className="block text-xs text-gray-500 mb-0.5">Weight</label>
-                <input
-                  type="number"
-                  className={fieldClass()}
-                  value={item.weight}
-                  onChange={(e) => updateLineItem(index, "weight", e.target.value)}
-                />
               </div>
               <div>
                 <label className="block text-xs text-gray-500 mb-0.5">Unit Value</label>
@@ -475,6 +447,26 @@ export default function InvoiceForm({ data, onChange, errors, logoUrl, onLogoUpl
             className={fieldClass()}
             value={data.totalPackages}
             onChange={(e) => update("totalPackages", e.target.value)}
+          />
+        </div>
+        <div>
+          <label className="block text-xs font-medium text-gray-600 mb-1">Type of Package</label>
+          <input
+            className={fieldClass()}
+            value={data.typeOfPackage}
+            onChange={(e) => update("typeOfPackage", e.target.value)}
+            placeholder="e.g. BOX, CRATE, PALLET"
+          />
+        </div>
+      </div>
+      <div className="grid grid-cols-2 gap-3">
+        <div>
+          <label className="block text-xs font-medium text-gray-600 mb-1">Total Weight</label>
+          <input
+            type="number"
+            className={fieldClass()}
+            value={data.totalWeight}
+            onChange={(e) => update("totalWeight", e.target.value)}
           />
         </div>
         <div>
@@ -522,15 +514,6 @@ export default function InvoiceForm({ data, onChange, errors, logoUrl, onLogoUpl
             onChange={(e) => update("dimensionH", e.target.value)}
           />
         </div>
-      </div>
-      <div>
-        <label className="block text-xs font-medium text-gray-600 mb-1">Total Weight</label>
-        <input
-          type="number"
-          className={fieldClass()}
-          value={data.totalWeight}
-          onChange={(e) => update("totalWeight", e.target.value)}
-        />
       </div>
 
       {/* Section 9: Declaration */}

@@ -3,14 +3,11 @@ import type { Currency, WeightUnit } from "./config/locations";
 export interface LineItem {
   id: string;
   hsCode: string;
-  numPackages: string;
-  typeOfPackage: string;
+  countryOfManufacture: string;
   description: string;
   qty: string;
   unitOfMeasure: string;
-  weight: string;
   unitValue: string;
-  countryOfManufacture: string;
 }
 
 export interface InvoiceData {
@@ -49,8 +46,9 @@ export interface InvoiceData {
   // Section 7: Line Items
   lineItems: LineItem[];
 
-  // Section 8: Totals
+  // Section 8: Totals & Package Info
   totalPackages: string;
+  typeOfPackage: string;
   dimensionL: string;
   dimensionW: string;
   dimensionH: string;
@@ -69,14 +67,11 @@ export function createEmptyLineItem(): LineItem {
   return {
     id: crypto.randomUUID(),
     hsCode: "",
-    numPackages: "",
-    typeOfPackage: "",
+    countryOfManufacture: "",
     description: "",
     qty: "",
     unitOfMeasure: "EA",
-    weight: "",
     unitValue: "",
-    countryOfManufacture: "",
   };
 }
 
@@ -105,6 +100,7 @@ export function getDefaultInvoiceData(): InvoiceData {
     isReturn: false,
     lineItems: [createEmptyLineItem()],
     totalPackages: "",
+    typeOfPackage: "",
     dimensionL: "",
     dimensionW: "",
     dimensionH: "",

@@ -20,9 +20,6 @@ export function calcTotalValue(items: LineItem[]): number {
   return items.reduce((sum, item) => sum + calcLineTotal(item), 0);
 }
 
-export function calcTotalWeight(items: LineItem[]): number {
-  return items.reduce((sum, item) => sum + (parseFloat(item.weight) || 0), 0);
-}
 
 export interface ValidationErrors {
   invoiceNumber?: string;

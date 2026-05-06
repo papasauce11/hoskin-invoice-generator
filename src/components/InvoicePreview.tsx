@@ -1,5 +1,5 @@
 import type { InvoiceData } from "../types";
-import { calcLineTotal, calcTotalValue, calcTotalWeight, formatCurrency } from "../utils";
+import { calcLineTotal, calcTotalValue, formatCurrency } from "../utils";
 
 interface Props {
   data: InvoiceData;
@@ -8,8 +8,7 @@ interface Props {
 
 export default function InvoicePreview({ data, logoUrl }: Props) {
   const totalValue = calcTotalValue(data.lineItems);
-  const totalWeight = calcTotalWeight(data.lineItems);
-  const effectiveWeight = data.totalWeight ? parseFloat(data.totalWeight) : totalWeight;
+  const effectiveWeight = parseFloat(data.totalWeight) || 0;
   const dimensions =
     data.dimensionL || data.dimensionW || data.dimensionH
       ? `${data.dimensionL || "-"} x ${data.dimensionW || "-"} x ${data.dimensionH || "-"}`
@@ -110,7 +109,7 @@ export default function InvoicePreview({ data, logoUrl }: Props) {
       <table style={{ width: "100%", borderCollapse: "collapse", marginBottom: "2px" }}>
         <thead>
           <tr>
-            {["HS Code", "No. of\nPkg", "Type of\nPkg", "Full Description of Goods", "Origin", "Qty", "Units", "Weight", "Unit Value", "Total Value"].map(
+            {["HS Code", "Origin", "Full Description of Goods", "Qty", "Units", "Unit Value", "Total Value"].map(
               (h, i) => (
                 <th
                   key={i}
@@ -134,13 +133,10 @@ export default function InvoicePreview({ data, logoUrl }: Props) {
           {data.lineItems.map((item) => (
             <tr key={item.id}>
               <td style={{ ...cellStyle, textAlign: "center", fontSize: "10px" }}>{item.hsCode}</td>
-              <td style={{ ...cellStyle, textAlign: "center", fontSize: "10px" }}>{item.numPackages}</td>
-              <td style={{ ...cellStyle, textAlign: "center", fontSize: "10px" }}>{item.typeOfPackage}</td>
-              <td style={{ ...cellStyle, fontSize: "10px" }}>{item.description}</td>
               <td style={{ ...cellStyle, textAlign: "center", fontSize: "10px" }}>{item.countryOfManufacture}</td>
+              <td style={{ ...cellStyle, fontSize: "10px" }}>{item.description}</td>
               <td style={{ ...cellStyle, textAlign: "center", fontSize: "10px" }}>{item.qty}</td>
               <td style={{ ...cellStyle, textAlign: "center", fontSize: "10px" }}>{item.unitOfMeasure}</td>
-              <td style={{ ...cellStyle, textAlign: "center", fontSize: "10px" }}>{item.weight}</td>
               <td style={{ ...cellStyle, textAlign: "right", fontSize: "10px" }}>
                 {item.unitValue ? formatCurrency(parseFloat(item.unitValue) || 0, data.currency) : ""}
               </td>
@@ -156,15 +152,19 @@ export default function InvoicePreview({ data, logoUrl }: Props) {
       <table style={{ width: "100%", borderCollapse: "collapse", marginBottom: "16px" }}>
         <tbody>
           <tr>
-            <td style={{ ...cellStyle, width: "20%", fontWeight: "bold", fontSize: "10px" }}>
-              <div style={{ fontSize: "8px", color: "#666" }}>Total Packages</div>
+            <td style={{ ...cellStyle, width: "15%", fontWeight: "bold", fontSize: "10px" }}>
+              <div style={{ fontSize: "8px", color: "#666" }}>No. of Packages</div>
               {data.totalPackages}
             </td>
-            <td style={{ ...cellStyle, width: "25%", fontWeight: "bold", fontSize: "10px" }}>
+            <td style={{ ...cellStyle, width: "15%", fontWeight: "bold", fontSize: "10px" }}>
+              <div style={{ fontSize: "8px", color: "#666" }}>Type of Package</div>
+              {data.typeOfPackage}
+            </td>
+            <td style={{ ...cellStyle, width: "20%", fontWeight: "bold", fontSize: "10px" }}>
               <div style={{ fontSize: "8px", color: "#666" }}>Dimensions (L x W x H)</div>
               {dimensions}
             </td>
-            <td style={{ ...cellStyle, width: "25%", fontWeight: "bold", fontSize: "10px" }}>
+            <td style={{ ...cellStyle, width: "20%", fontWeight: "bold", fontSize: "10px" }}>
               <div style={{ fontSize: "8px", color: "#666" }}>Total Weight</div>
               {effectiveWeight > 0 ? `${effectiveWeight} ${data.weightUnit}` : ""}
             </td>
