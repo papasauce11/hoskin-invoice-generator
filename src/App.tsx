@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import InvoiceForm from "./components/InvoiceForm";
 import InvoicePreview from "./components/InvoicePreview";
+import HelpModal from "./components/HelpModal";
 import { getDefaultInvoiceData } from "./types";
 import type { InvoiceData } from "./types";
 import { validateInvoice } from "./utils";
@@ -12,6 +13,7 @@ function App() {
   const [data, setData] = useState<InvoiceData>(getDefaultInvoiceData);
   const [errors, setErrors] = useState<ValidationErrors>({});
   const [logoUrl, setLogoUrl] = useState<string>(DEFAULT_LOGO);
+  const [helpOpen, setHelpOpen] = useState(false);
   const previewRef = useRef<HTMLDivElement>(null);
 
   function handleLogoUpload(file: File) {
@@ -85,6 +87,12 @@ function App() {
           <h1 className="text-lg font-bold text-gray-800">Commercial Invoice Generator</h1>
           <div className="flex gap-2">
             <button
+              onClick={() => setHelpOpen(true)}
+              className="px-4 py-2 text-sm font-medium text-gray-600 bg-white border border-gray-300 rounded hover:bg-gray-50"
+            >
+              ? Help
+            </button>
+            <button
               onClick={handleReset}
               className="px-4 py-2 text-sm font-medium text-gray-600 bg-white border border-gray-300 rounded hover:bg-gray-50"
             >
@@ -131,6 +139,8 @@ function App() {
           </div>
         </div>
       </main>
+
+      <HelpModal open={helpOpen} onClose={() => setHelpOpen(false)} />
     </div>
   );
 }
