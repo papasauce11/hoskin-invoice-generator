@@ -7,10 +7,35 @@ body {
 }
 
 @media print {
+  /* Zero page margin stops the browser adding its own date, title, URL and page-number header/footer */
+  @page {
+    size: letter;
+    margin: 0;
+  }
+  html,
   body {
     background: white;
+    margin: 0;
+    padding: 0;
   }
   .no-print {
     display: none !important;
+  }
+  /* Strip the app chrome around the invoice so it fills exactly one page */
+  .print-plain {
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: none !important;
+    min-height: 0 !important;
+    background: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+  #invoice-preview {
+    width: 100% !important;
+    min-height: 0 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 }

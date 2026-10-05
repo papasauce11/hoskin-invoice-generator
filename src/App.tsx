@@ -80,7 +80,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="print-plain min-h-screen bg-gray-100">
       {/* Header */}
       <header className="no-print bg-white border-b border-gray-200 sticky top-0 z-10 shadow-sm">
         <div className="max-w-[1400px] mx-auto px-4 py-3 flex items-center justify-between">
@@ -115,7 +115,7 @@ function App() {
       </header>
 
       {/* Main */}
-      <main className="max-w-[1400px] mx-auto px-4 py-6 flex gap-6">
+      <main className="print-plain max-w-[1400px] mx-auto px-4 py-6 flex gap-6">
         {/* Form Panel */}
         <div className="no-print w-[420px] shrink-0">
           <div className="bg-white rounded-lg shadow p-5 sticky top-[72px] max-h-[calc(100vh-96px)] overflow-y-auto">
@@ -131,9 +131,9 @@ function App() {
         </div>
 
         {/* Preview Panel */}
-        <div className="flex-1 min-w-0" ref={previewRef}>
-          <div className="bg-gray-200 rounded-lg p-4 flex justify-center">
-            <div className="shadow-lg">
+        <div className="print-plain flex-1 min-w-0" ref={previewRef}>
+          <div className="print-plain bg-gray-200 rounded-lg p-4 flex justify-center">
+            <div className="print-plain shadow-lg">
               <InvoicePreview data={data} logoUrl={logoUrl} />
             </div>
           </div>
