@@ -25,6 +25,7 @@ export interface ValidationErrors {
   invoiceNumber?: string;
   recipientCompanyName?: string;
   recipientAddress?: string;
+  taxIdNumber?: string;
   lineItems?: string;
   signerName?: string;
 }
@@ -33,6 +34,7 @@ export function validateInvoice(data: {
   invoiceNumber: string;
   recipientCompanyName: string;
   recipientAddress: string;
+  taxIdNumber: string;
   lineItems: LineItem[];
   signerName: string;
 }): ValidationErrors {
@@ -40,6 +42,7 @@ export function validateInvoice(data: {
   if (!data.invoiceNumber.trim()) errors.invoiceNumber = "Required";
   if (!data.recipientCompanyName.trim()) errors.recipientCompanyName = "Required";
   if (!data.recipientAddress.trim()) errors.recipientAddress = "Required";
+  if (!data.taxIdNumber.trim()) errors.taxIdNumber = "Required";
   if (!data.signerName.trim()) errors.signerName = "Required";
 
   const hasValidItem = data.lineItems.some(

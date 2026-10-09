@@ -286,17 +286,18 @@ export default function InvoiceForm({ data, onChange, errors, logoUrl, onLogoUpl
             className={fieldClass()}
             value={data.taxIdLabel}
             onChange={(e) => update("taxIdLabel", e.target.value)}
-            placeholder='e.g. "Humboldt Tax ID"'
+            placeholder='Defaults to "Tax ID (IRS#)"'
           />
         </div>
         <div>
-          <label className="block text-xs font-medium text-gray-600 mb-1">Tax ID Number</label>
+          <label className="block text-xs font-medium text-gray-600 mb-1">Tax ID Number (IRS#) *</label>
           <input
-            className={fieldClass()}
+            className={fieldClass(errors.taxIdNumber)}
             value={data.taxIdNumber}
             onChange={(e) => update("taxIdNumber", e.target.value)}
             placeholder="e.g. 31-0961077"
           />
+          {errors.taxIdNumber && <span className="text-xs text-red-500">{errors.taxIdNumber}</span>}
         </div>
       </div>
 

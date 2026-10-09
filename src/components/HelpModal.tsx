@@ -82,9 +82,10 @@ export default function HelpModal({ open, onClose }: Props) {
               The carrier/courier (e.g., FedEx, UPS, DHL) and the tracking or waybill number.
               Optional but helpful for customs.
             </Def>
-            <Def term="Tax ID Label & Number">
-              If the recipient's country requires a tax or VAT ID for clearance, enter the
-              label (e.g., "VAT Number", "Humboldt Tax ID") and the corresponding number.
+            <Def term="Tax ID Number (IRS#)">
+              Required. The importer's tax ID used for customs clearance, such as the US IRS
+              number (e.g., 31-0961077). The label prints as "Tax ID (IRS#)" by default; change
+              the Tax ID Label to override it (e.g., "VAT Number" or "Humboldt Tax ID").
             </Def>
             <Def term="Currency">
               The currency all values on the invoice are stated in. This changes the symbol

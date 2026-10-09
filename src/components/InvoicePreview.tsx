@@ -73,9 +73,7 @@ export default function InvoicePreview({ data, logoUrl }: Props) {
               <Row label="Country of Ultimate Destination" value={data.countryOfDestination} />
               {data.transporterName && <Row label="Transporter Name" value={data.transporterName} />}
               {data.transporterDocNumber && <Row label="Transporter Document #" value={data.transporterDocNumber} />}
-              {(data.taxIdLabel || data.taxIdNumber) && (
-                <Row label={data.taxIdLabel || "Tax ID"} value={data.taxIdNumber} />
-              )}
+              <Row label={data.taxIdLabel || "Tax ID (IRS#)"} value={data.taxIdNumber} />
             </td>
             <td style={{ ...cellStyle, width: "50%", verticalAlign: "top" }}>
               <div style={{ fontWeight: "bold", marginBottom: "2px" }}>Importer:</div>
